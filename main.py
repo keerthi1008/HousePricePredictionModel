@@ -9,8 +9,8 @@ from sklearn.model_selection import RandomizedSearchCV
 warnings.filterwarnings('ignore')
 plt.style.use('ggplot')
 
-train = pd.read_csv('../data/train.csv')
-test = pd.read_csv('../data/test.csv')
+train = pd.read_csv('data/train.csv')
+test = pd.read_csv('data/test.csv')
 
 #train.head()
 
@@ -166,9 +166,9 @@ regressor.fit(X_train,y_train)
 y_pred = regressor.predict(df_Test)
 
 y_pred
-array([129000., 157900., 181000., ..., 168000.,  93500., 250000.])
+
 pred=pd.DataFrame(y_pred)
-samp = pd.read_csv('../input/house-prices-advanced-regression-techniques/test.csv')
+samp = pd.read_csv('data/test.csv')
 sub = pd.concat([samp['Id'],pred], axis=1)
 sub.columns=['Id','SalePrice']
 sub
@@ -215,24 +215,13 @@ regressor = xgboost.XGBRegressor(base_score=0.25, booster='gbtree', colsample_by
              validate_parameters=1, verbosity=None)
 regressor.fit(X_train,y_train)
 
-XGBRegressor(base_score=0.25, booster='gbtree', colsample_bylevel=1,
-             colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
-             importance_type='gain', interaction_constraints='',
-             learning_rate=0.1, max_delta_step=0, max_depth=2,
-             min_child_weight=1, missing=nan, monotone_constraints='()',
-             n_estimators=900, n_jobs=0, num_parallel_tree=1,
-             objective='reg:squarederror', random_state=0, reg_alpha=0,
-             reg_lambda=1, scale_pos_weight=1, subsample=1, tree_method='exact',
-             validate_parameters=1, verbosity=None)
 y_pred = regressor.predict(df_Test)
 y_pred
-array([114042.1 , 164575.23, 190523.47, ..., 175098.2 , 117959.04,
-       233386.06], dtype=float32)
+
 pred=pd.DataFrame(y_pred)
-samp = pd.read_csv('../input/house-prices-advanced-regression-techniques/test.csv')
+samp = pd.read_csv('data/test.csv')
 sub = pd.concat([samp['Id'],pred], axis=1)
 sub.columns=['Id','SalePrice']
 sub
-
 
 sub.to_csv('My_sub1.csv',index=False)
